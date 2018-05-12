@@ -1,0 +1,10 @@
+---
+applications:
+- name: todos
+  memory: 1G
+  host: todos
+  path: target/todos-gateway-0.0.1-RELEASE.jar
+  buildpack: java_buildpack
+  env:
+    TODOS_API_ENDPOINT: todos-java.apps.pcf.corbscloud.io
+    TODOS_WEB_ENDPOINT: todos-web.apps.pcf.corbscloud.io
