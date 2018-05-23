@@ -1,0 +1,30 @@
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+management:
+    endpoints:
+        web:
+            base-path: /ops
+            exposure:
+                include: '*'
+server:
+    port: 9999
+spring:
+    application:
+        name: todos-gateway
+todos:
+    web:
+        endpoint: http://localhost:4040
+todos-java:
+    api:
+        endpoint: http://localhost:8004/api
+
+zuul:
+    routes:
+        todos-java:
+            path: /api/**
+            url: ${todos-java.api.endpoint}
+        todo-web:
+            path: /**
+            url: ${todos.web.endpoint}

@@ -5,7 +5,7 @@ applications:
   routes:
   - route: todos-gateway.apps.pcf.corbscloud.io
   - route: todos-gateway-1-0-0-RELEASE.apps.pcf.corbscloud.io
-  path: target/todos-gateway-1.0.0-RELEASE.jar
+  path: target/todos-gateway-1.0.0.RELEASE.jar
   buildpack: java_buildpack
   env:
-    JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://cloud-index.apps.pcf.corbscloud.io/eureka -Dtodos.web.endpoint=http://todos-web.apps.pcf.corbscloud.io -Dtodos-query.api.endpoint=http://todos-query.apps.pcf.corbscloud.io -Dtodos-command.api.endpoint=http://todos-command.apps.pcf.corbscloud.io'
+    JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://cloud-index.apps.pcf.corbscloud.io/eureka/ -Dtodos.web.endpoint=http://todos-web.apps.pcf.corbscloud.io -Dtodos-query.api.endpoint=http://todos-query.apps.pcf.corbscloud.io -Dtodos-command.api.endpoint=http://todos-command.apps.pcf.corbscloud.io'
