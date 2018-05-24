@@ -22,6 +22,9 @@ todos-java:
 
 zuul:
     routes:
+        todos-gateway-ops:
+            path: /ops/**
+            url: forward:/ops
         todos-java:
             path: /api/**
             url: ${todos-java.api.endpoint}
