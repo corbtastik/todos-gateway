@@ -5,11 +5,11 @@
 
 	<groupId>io.corbs</groupId>
 	<artifactId>todos-gateway</artifactId>
-	<version>1.0.4.PRERELEASE</version>
+	<version>1.0.0.SNAP</version>
 	<packaging>jar</packaging>
 
 	<name>todos-gateway</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Micro Gateway for Todo(s) Microservice(s)</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
