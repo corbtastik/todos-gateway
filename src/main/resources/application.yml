@@ -13,6 +13,18 @@ server:
 spring:
     application:
         name: todos-gateway
+    sleuth:
+        sampler:
+          probability: 1
+
+logging:
+    level:
+        io:
+            corbs: DEBUG
+        org:
+            springframework:
+                cloud: DEBUG
+
 todos:
     web:
         endpoint: http://localhost:4040

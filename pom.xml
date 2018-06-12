@@ -5,7 +5,7 @@
 
 	<groupId>io.corbs</groupId>
 	<artifactId>todos-gateway</artifactId>
-	<version>1.0.0.SNAP</version>
+	<version>1.0.0.RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>todos-gateway</name>
@@ -42,10 +42,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- distributed tracing -->
+        <!-- enable log correlation -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <!-- enable distributed tracing -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
         <!-- Register with Service Registry -->
         <dependency>
