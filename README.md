@@ -65,20 +65,27 @@ By default the Gateway binds to port 9999 but this can be overridden on the comm
 
 Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
-![Listing Gateway Routes](https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-routes.png)
+<p align="center">
+    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-routes.png">
+</p>
 
 If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port 8080 and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on 4040 then you can access those apps through the Gateway endpoint as shown below.
 
-![Calling API via Gateway](https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-api-call.png)
+<p align="center">
+    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-api-call.png">
+</p>
 
 The Gateway returns the Todo(s) UI app when client calls on the root path.  For example this call returns the HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
 
-![Getting UI via Gateway](https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui-call.png)
+<p align="center">
+    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui-call.png">
+</p>
 
 Which means we can load the Todo(s) UI with the Browser by accessing the Gateway.
 <p align="center">
   <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui.png">
 </p>
+
 ### Spring Cloud Ready
 
 Like every Microservice in Todo-EcoSystem the Gateway plugs into the Spring Cloud stack several ways.
