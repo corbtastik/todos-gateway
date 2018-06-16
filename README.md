@@ -9,7 +9,7 @@ For example ``/api`` is mapped to a backing API and ``/`` is mapped to a fronten
 * [Spring Cloud Netflix Zuul](https://cloud.spring.io/spring-cloud-netflix/)
 * [Spring Cloud Config Client](https://cloud.spring.io/spring-cloud-config/)
 
-This gateway is used for the [Todo collection](https://github.com/corbtastik/todo-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Workshops.
+This gateway is used for the [Todo collection](https://github.com/corbtastik/todo-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Developer Workshops.
 
 Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots an embedded tomcat server to host the Gateway.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is configuration of the routes.
 
