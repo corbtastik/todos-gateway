@@ -63,7 +63,7 @@ By default the Gateway binds to port 9999 but this can be overridden on the comm
 
 ### Verify
 
-Use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
+Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
 ![Listing Gateway Routes](https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-routes.png)
 
