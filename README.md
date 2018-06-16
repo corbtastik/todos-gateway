@@ -114,7 +114,7 @@ To have the Gateway participate in Service Discovery we added the eureka-client 
     </dependency>
 ```
 
-This library will be on the classpath and when Spring Boot starts it will automatically register with Eureka.  When running locally with Eureka we don't need to provide config to fund the Eureka Server.  However when we push to the cloud we'll need to local Eureka and that's done with the following config in ``application.yml|properties`` 
+This library will be on the classpath and when Spring Boot starts it will automatically register with Eureka.  When running locally with Eureka we don't need to provide config to find the Eureka Server.  However when we push to the cloud we'll need to locate Eureka and that's done with the following config in ``application.yml|properties`` 
 
 ```yml
 eureka:
