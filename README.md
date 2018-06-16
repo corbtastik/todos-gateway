@@ -77,7 +77,7 @@ The Gateway returns the Todo(s) UI app when client calls on the root path.  For 
 
 Which means we can load the Todo(s) UI with the Browser by accessing the Gateway.
 <p align="center">
-![TodoUI via Gateway](https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui.png)
+  <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui.png">
 </p>
 ### Spring Cloud Ready
 
