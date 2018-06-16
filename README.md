@@ -103,7 +103,7 @@ spring:
       uri: ${SPRING_CONFIG_URI:http://localhost:8888}
 ```
 
-#### 2) Spring Cloud Eureka Client : To participate in service discovery
+#### 2) Spring Cloud Eureka Client : Participate in service discovery
 
 To have the Gateway participate in Service Discovery we added the eureka-client dependency in our pom.xml.
 
