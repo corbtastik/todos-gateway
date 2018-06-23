@@ -65,9 +65,19 @@ By default the Gateway binds to port ``9999`` but this can be overridden on the 
 
 Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-routes.png">
-</p>
+```bash
+> http :9999/ops/routes
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
+Date: Sat, 23 Jun 2018 22:43:46 GMT
+Transfer-Encoding: chunked
+
+{
+    "/**": "http://localhost:4040",
+    "/api/**": "http://localhost:8080/todos",
+    "/ops/**": "forward:/ops"
+}
+```
 
 If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port ``8080`` and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on ``4040`` then you can access those apps through the Gateway endpoint as shown below.
 
