@@ -69,7 +69,7 @@ Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx
     <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-routes.png">
 </p>
 
-If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port 8080 and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on 4040 then you can access those apps through the Gateway endpoint as shown below.
+If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port ``8080`` and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on ``4040`` then you can access those apps through the Gateway endpoint as shown below.
 
 <p align="center">
     <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-api-call.png">
