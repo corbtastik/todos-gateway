@@ -16,7 +16,7 @@ management:
 todos:
     api:
         endpoint: http://localhost:8080/todos
-    web:
+    ui:
         endpoint: http://localhost:4040
 # Router configuration
 zuul:
@@ -27,6 +27,6 @@ zuul:
         todos-api:
             path: /api/**
             url: ${todos.api.endpoint}            
-        todos-web:
+        todos-ui:
             path: /**
-            url: ${todos.web.endpoint}
+            url: ${todos.ui.endpoint}

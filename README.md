@@ -19,7 +19,7 @@ Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots 
 todos:
     api:
         endpoint: http://localhost:8080/todos    
-    web:
+    ui:
         endpoint: http://localhost:4040
 # Router configuration
 zuul:
@@ -32,9 +32,9 @@ zuul:
         todos-api:
             path: /api/**
             url: ${todos.api.endpoint}            
-        todos-web:
+        todos-ui:
             path: /**
-            url: ${todos.web.endpoint}
+            url: ${todos.ui.endpoint}
 ```
 
 By default only 3 routes are defined, one for a backing API and one for a frontend UI and a forward to itself so [actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) are exposed.  Specifically the backing API and UI are part of the Todo-EcoSystem of Microservices.  The frontend UI is the Vue.js implementation of [TodoMVC](http://todomvc.com/examples/vue/) and the backing API implements endpoints necessary to make the UI function.  In order to use this Gateway you need to clone, build and run each of these apps.  See the respective repos for information on the [UI](https://github.com/corbtastik/todos-ui) and [API](https://github.com/corbtastik/todos-api).
@@ -51,6 +51,30 @@ cd todos-gateway
 
 ```bash
 java -jar target/todos-gateway-1.0.0.SNAP.jar
+```
+
+### Run Overrides
+
+```bash
+java -jar target/todos-gateway-1.0.0.SNAP.jar \
+  --todos.api.endpoint=howdy \
+  --todos.ui.endpoint=spring-boot
+```
+
+This will override the API and UI endpoints.
+
+```bash
+> http :9999/ops/routes
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:30:15 GMT
+Transfer-Encoding: chunked
+
+{
+    "/**": "spring-boot",
+    "/api/**": "howdy",
+    "/ops/**": "forward:/ops"
+}
 ```
 
 ### Run with Remote Debug 
