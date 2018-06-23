@@ -59,7 +59,7 @@ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=9111,suspend=n \
   -jar target/todos-gateway-1.0.0.SNAP.jar
 ```
 
-By default the Gateway binds to port 9999 but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the Todo EcoSystem of apps.  When we push to the Cloud we'll let the Cloud Platform (Cloud Foundry) manage what port is used.
+By default the Gateway binds to port ``9999`` but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the Todo EcoSystem of apps.  When we push to the Cloud we'll let the Cloud Platform (Cloud Foundry) manage what port is used.
 
 ### Verify
 
