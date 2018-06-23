@@ -279,7 +279,24 @@ Yes you can go from zero to hero with one command :)
 Make sure your in the Todo(s) Gateway project root (folder with ``manifest.yml``) and cf push...awe yeah!
 
 ```
-cf push --vars-file ./vars.yml  
+> cf push --vars-file ./vars.yml
+```
+
+```
+> cf app todos-gateway
+Showing health and status for app todos-gateway in org bubbles / space dev as ... 
+
+name:              todos-gateway
+requested state:   started
+instances:         1/1
+usage:             1G x 1 instances
+routes:            todos-gateway.cfapps.io
+last uploaded:     Sat 23 Jun 18:48:53 CDT 2018
+stack:             cflinuxfs2
+buildpack:         java_buildpack
+
+     state     since                  cpu      memory         disk           details
+#0   running   2018-06-23T23:50:33Z   113.9%   389.2M of 1G   165.4M of 1G  
 ```
 
 
