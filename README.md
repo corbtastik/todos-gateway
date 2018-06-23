@@ -225,6 +225,62 @@ The event format is: ``[app, traceId, spanId, isExportable]``, where
 Reference the [Spring Cloud Sleuth](https://cloud.spring.io/spring-cloud-sleuth/) docs for more information.
 
 
+### Run on (PAS) Pivotal Application Service
+
+[Pivotal Application Service](https://pivotal.io/platform/pivotal-application-service) is a modern runtime for Java, .NET, Node.js apps and many more.  It's a Cloud Native Runtime that provides a connected 5-star development to delivery experience.  PAS provides a cloud agnostic surface for apps and ops alike.
+
+#### manifest.yml & vars.yml
+
+The only PAS specific artifacts in this code repo are ``manifest.yml`` and ``vars.yml``.  Modify ``vars.yml`` to add properties specific to your PAS environment. See [Variable Substitution](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#multi-manifests) for more information.  The gist is we only need to set values for our PAS deployment in ``vars.yml`` and pass that file to ``cf push``.
+
+The Todo(s) Gateway requires 3 environment variables:
+
+1. ``EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE`` - Service Discovery URL
+2. ``TODOS_UI_ENDPOINT`` - [Todo(s) UI in Vue.js](https://github.com/corbtastik/todos-ui) URL
+3. ``TODOS_API_ENDPOINT`` - [Todo(s) API](https://github.com/corbtastik/todos-api) in Spring Boot
+
+#### manifest.yml
+
+```yml
+app:
+  name: todos-gateway
+  memory: 1G
+  route: todos-gateway.cfapps.io
+env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
+env-val-1: http://cloud-index.cfapps.io/eureka/
+env-key-2: TODOS_UI_ENDPOINT
+env-val-2: http://todos-ui.cfapps.io
+env-key-3: TODOS_API_ENDPOINT
+env-val-3: http://todos-api.cfapps.io/todos
+```
+
+#### vars.yml
+
+```yml
+app:
+  name: todos-gateway
+  memory: # your memory value, ex: 1G
+  route:  # your route value, ex: todos-gateway.cfapps.io
+env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
+env-val-1: # your service discovery url, ex: http://cloud-index.cfapps.io/eureka/
+env-key-2: TODOS_UI_ENDPOINT
+env-val-2: # your todo(s) UI url, ex: http://todos-ui.cfapps.io
+env-key-3: TODOS_API_ENDPOINT
+env-val-3: # your todo(s) API url, ex: http://todos-api.cfapps.io/todos
+```
+
+#### cf push...awe yeah
+
+Yes you can go from zero to hero with one command :)
+
+Make sure your in the Todo(s) Gateway project root (folder with ``manifest.yml``) and cf push...awe yeah!
+
+```
+cf push --vars-file ./vars.yml  
+```
+
+
+
 
 
 

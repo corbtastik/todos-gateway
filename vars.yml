@@ -4,7 +4,7 @@ app:
   route: todos-gateway.cfapps.io
 env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
 env-val-1: http://cloud-index.cfapps.io/eureka/
-env-key-2: TODOS_WEB_ENDPOINT
+env-key-2: TODOS_UI_ENDPOINT
 env-val-2: http://todos-ui.cfapps.io
 env-key-3: TODOS_API_ENDPOINT
 env-val-3: http://todos-api.cfapps.io/todos
