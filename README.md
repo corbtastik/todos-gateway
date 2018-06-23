@@ -2,14 +2,14 @@
 
 Howdy and welcome.  This repository contains a Microservice Gateway implemented in [Spring Boot](https://spring.io/projects/spring-boot) and [Spring Cloud](https://spring.io/projects/spring-cloud).  This Gateway uses Spring Cloud Netflix Zuul to handle routing to the correct Microservice.
 
-For example ``/api`` is mapped to a backing API and ``/`` is mapped to a frontend UI.  Zuul is a dynamic router and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the Ghostbusters would surely appreciate.
+For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/todos-api) and ``/`` is mapped to a [frontend UI](https://github.com/corbtastik/todos-ui).  Zuul is a dynamic router, proxy and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the Ghostbusters would surely appreciate.
 
 **Major dependencies**
 * [Spring Cloud Netflix Eureka](https://cloud.spring.io/spring-cloud-netflix/)
 * [Spring Cloud Netflix Zuul](https://cloud.spring.io/spring-cloud-netflix/)
 * [Spring Cloud Config Client](https://cloud.spring.io/spring-cloud-config/)
 
-This gateway is used for the [Todo collection](https://github.com/corbtastik/todo-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Developer Workshops.
+This gateway is used for the [Todo collection](https://github.com/corbtastik/todos-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Developer Workshops.
 
 Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots an embedded tomcat server to host the Gateway.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is configuration of the routes.
 
