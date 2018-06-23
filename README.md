@@ -2,7 +2,7 @@
 
 Howdy and welcome.  This repository contains a Microservice Gateway implemented in [Spring Boot](https://spring.io/projects/spring-boot) and [Spring Cloud](https://spring.io/projects/spring-cloud).  This Gateway uses Spring Cloud Netflix Zuul to handle routing to the correct Microservice.
 
-For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/todos-api) and ``/`` is mapped to a [frontend UI](https://github.com/corbtastik/todos-ui).  Zuul is a dynamic router, proxy and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the Ghostbusters would surely appreciate.
+For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/todos-api) and ``/`` is mapped to a [frontend UI](https://github.com/corbtastik/todos-ui).  Zuul is a dynamic router, proxy and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the [Ghostbusters](http://ghostbusters.wikia.com/wiki/Zuul) would surely appreciate.
 
 **Major dependencies**
 * [Spring Cloud Netflix Eureka](https://cloud.spring.io/spring-cloud-netflix/)
