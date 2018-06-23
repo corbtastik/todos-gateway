@@ -18,7 +18,7 @@ Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots 
 ```yml
 todos:
     api:
-        endpoint: http://localhost:8080    
+        endpoint: http://localhost:8080/todos    
     web:
         endpoint: http://localhost:4040
 # Router configuration
