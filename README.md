@@ -11,7 +11,7 @@ For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/
 
 This gateway is used for the [Todo collection](https://github.com/corbtastik/todos-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Developer Workshops.
 
-Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots an embedded tomcat server to host the Gateway.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is configuration of the routes.
+Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots an embedded tomcat server to host the Gateway.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is manual configuration of 2 routes.  When Todo(s) gateway boots into a Spring Cloud environment it will sync with Service Discovery and load Microservice routes dynamically as they come online and remove them when they go offline.  More on that later :)
 
 **Route Configuration**
 
