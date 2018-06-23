@@ -1,6 +1,6 @@
 ## Todo(s) Gateway
 
-Howdy and welcome.  This repository contains a Microservice Gateway implemented in Spring Boot and Spring Cloud.  This Gateway uses Spring Cloud Zuul to handle routing to the correct Microservice.
+Howdy and welcome.  This repository contains a Microservice Gateway implemented in [Spring Boot](https://spring.io/projects/spring-boot) and [Spring Cloud](https://spring.io/projects/spring-cloud).  This Gateway uses Spring Cloud Netflix Zuul to handle routing to the correct Microservice.
 
 For example ``/api`` is mapped to a backing API and ``/`` is mapped to a frontend UI.  Zuul is a dynamic router and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the Ghostbusters would surely appreciate.
 
