@@ -128,7 +128,7 @@ last-modified: Sat, 23 Jun 2018 20:01:15 GMT
 		<section class="todoapp" v-cloak>
 ```
 
-Which means we can load the Todo(s) UI with the Browser by accessing the Gateway.
+Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``localhost:9999``.
 <p align="center">
   <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui.png">
 </p>
