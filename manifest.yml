@@ -1,11 +1,12 @@
 ---
 applications:
-- name: todos-gateway
-  memory: 1G
+- name: ((app.name))
+  memory: ((app.memory))
   routes:
-  - route: todos-gateway.cfapps.io
-  - route: todos-gateway-1-0-0-SNAP.cfapps.io
+  - route: ((app.route))
   path: target/todos-gateway-1.0.0.SNAP.jar
   buildpack: java_buildpack
   env:
-    JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://cloud-index.cfapps.io/eureka/ -Dtodos.web.endpoint=http://todos-ui.cfapps.io -Dtodos.api.endpoint=http://todos-api.cfapps.io/todos'
+    ((env-key-1)): ((env-val-1))
+    ((env-key-2)): ((env-val-2))
+    ((env-key-3)): ((env-val-3))
