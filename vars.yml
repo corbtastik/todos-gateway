@@ -1,5 +1,6 @@
 app:
   name: todos-gateway
+  artifact: target/todos-gateway-1.0.0.SNAP.jar
   memory: 1G
   route: todos-gateway.cfapps.io
 env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE

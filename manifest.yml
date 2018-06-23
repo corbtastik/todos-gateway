@@ -4,7 +4,7 @@ applications:
   memory: ((app.memory))
   routes:
   - route: ((app.route))
-  path: target/todos-gateway-1.0.0.SNAP.jar
+  path: ((app.artifact))
   buildpack: java_buildpack
   env:
     ((env-key-1)): ((env-val-1))

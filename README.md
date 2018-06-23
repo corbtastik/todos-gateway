@@ -242,16 +242,18 @@ The Todo(s) Gateway requires 3 environment variables:
 #### manifest.yml
 
 ```yml
-app:
-  name: todos-gateway
-  memory: 1G
-  route: todos-gateway.cfapps.io
-env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
-env-val-1: http://cloud-index.cfapps.io/eureka/
-env-key-2: TODOS_UI_ENDPOINT
-env-val-2: http://todos-ui.cfapps.io
-env-key-3: TODOS_API_ENDPOINT
-env-val-3: http://todos-api.cfapps.io/todos
+---
+applications:
+- name: ((app.name))
+  memory: ((app.memory))
+  routes:
+  - route: ((app.route))
+  path: ((app.artifact))
+  buildpack: java_buildpack
+  env:
+    ((env-key-1)): ((env-val-1))
+    ((env-key-2)): ((env-val-2))
+    ((env-key-3)): ((env-val-3))
 ```
 
 #### vars.yml
@@ -259,6 +261,7 @@ env-val-3: http://todos-api.cfapps.io/todos
 ```yml
 app:
   name: todos-gateway
+  artifact: target/todos-gateway-1.0.0.SNAP.jar
   memory: # your memory value, ex: 1G
   route:  # your route value, ex: todos-gateway.cfapps.io
 env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
