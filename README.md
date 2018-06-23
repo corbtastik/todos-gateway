@@ -81,15 +81,52 @@ Transfer-Encoding: chunked
 
 If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port ``8080`` and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on ``4040`` then you can access those apps through the Gateway endpoint as shown below.
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-api-call.png">
-</p>
+```bash
+> http :9999/api/ 
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:18:24 GMT
+Transfer-Encoding: chunked
+
+[]
+
+> http :9999/api/ title="make bacon pancakes"
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:18:37 GMT
+Transfer-Encoding: chunked
+
+{
+    "completed": false,
+    "id": 0,
+    "title": "make bacon pancakes"
+}
+```
 
 The Gateway returns the Todo(s) UI app when client calls on the root path.  For example this call returns the HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui-call.png">
-</p>
+```bash
+> http :9999/
+HTTP/1.1 200 
+Content-Type: text/html;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:18:19 GMT
+Transfer-Encoding: chunked
+cache-control: max-age=3600
+etag: W/"1984861-2524-"2018-06-23T20:01:15.169Z""
+last-modified: Sat, 23 Jun 2018 20:01:15 GMT
+
+<!doctype html>
+<html data-framework="vue">
+	<head>
+		<meta charset="utf-8">
+		<title>Vue.js • TodoMVC</title>
+		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+		<style> [v-cloak] { display: none; } </style>
+	</head>
+	<body>
+		<section class="todoapp" v-cloak>
+```
 
 Which means we can load the Todo(s) UI with the Browser by accessing the Gateway.
 <p align="center">
