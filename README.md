@@ -135,7 +135,7 @@ Which means we can load the Todo(s) UI with the Browser by accessing the Gateway
 
 ### Spring Cloud Ready
 
-Like every Microservice in Todo-EcoSystem the Gateway plugs into the Spring Cloud stack several ways.
+Like every Microservice in [Todo-EcoSystem](https://github.com/corbtastik/todos-ecosystem) the Gateway plugs into the Spring Cloud stack several ways.
 
 #### 1) Spring Cloud Config Client : Pull config from Config Server
 
