@@ -225,7 +225,6 @@ The event format is: ``[app, traceId, spanId, isExportable]``, where
 
 Reference the [Spring Cloud Sleuth](https://cloud.spring.io/spring-cloud-sleuth/) docs for more information.
 
-
 ### Run on (PAS) Pivotal Application Service
 
 [Pivotal Application Service](https://pivotal.io/platform/pivotal-application-service) is a modern runtime for Java, .NET, Node.js apps and many more.  It's a Cloud Native Runtime that provides a connected 5-star development to delivery experience.  PAS provides a cloud agnostic surface for apps and ops alike.
