@@ -276,13 +276,13 @@ env-val-3: # your todo(s) API url, ex: http://todos-api.cfapps.io/todos
 
 Yes you can go from zero to hero with one command :)
 
-Make sure your in the Todo(s) Gateway project root (folder with ``manifest.yml``) and cf push...awe yeah!
+Make sure you're in the Todo(s) Gateway project root (folder with ``manifest.yml``) and cf push...awe yeah!
 
-```
+```bash
 > cf push --vars-file ./vars.yml
 ```
 
-```
+```bash
 > cf app todos-gateway
 Showing health and status for app todos-gateway in org bubbles / space dev as ... 
 
@@ -398,4 +398,6 @@ TODOS_API_ENDPOINT: http://todos-api.cfapps.io/todos
 TODOS_UI_ENDPOINT: http://todos-ui.cfapps.io
 ```
 
-### Done...Nacho - [I don't want to get paid to lose. I wanna win!](https://www.youtube.com/watch?v=7q3nYbf2nOk)  
+### Stay Frost  
+
+#### Nacho - [I don't want to get paid to lose. I wanna win!](https://www.youtube.com/watch?v=7q3nYbf2nOk)  
