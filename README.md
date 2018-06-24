@@ -4,7 +4,8 @@ Howdy and welcome.  This repository contains a Microservice Gateway implemented 
 
 For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/todos-api) and ``/`` is mapped to a [frontend UI](https://github.com/corbtastik/todos-ui).  Zuul is a dynamic router, proxy and server-side load-balancer implemented by Netflix.  Spring Cloud makes using Zuul a cinch which the [Ghostbusters](http://ghostbusters.wikia.com/wiki/Zuul) would surely appreciate.
 
-**Major dependencies**
+**Primary dependencies**
+
 * [Spring Cloud Netflix Eureka](https://cloud.spring.io/spring-cloud-netflix/)
 * [Spring Cloud Netflix Zuul](https://cloud.spring.io/spring-cloud-netflix/)
 * [Spring Cloud Config Client](https://cloud.spring.io/spring-cloud-config/)
@@ -398,27 +399,4 @@ TODOS_API_ENDPOINT: http://todos-api.cfapps.io/todos
 TODOS_UI_ENDPOINT: http://todos-ui.cfapps.io
 ```
 
-### Done...Nacho - [I don't want to get paid to lose. I wanna win!](https://www.youtube.com/watch?v=7q3nYbf2nOk)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Done...Nacho - [I don't want to get paid to lose. I wanna win!](https://www.youtube.com/watch?v=7q3nYbf2nOk)  
