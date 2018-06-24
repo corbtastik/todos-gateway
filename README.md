@@ -301,6 +301,8 @@ buildpack:         java_buildpack
 
 ### Verify on Cloud
 
+#### Call Gateway on Cloud
+
 Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
 ```bash
@@ -319,6 +321,8 @@ X-Vcap-Request-Id: e60c6342-0b0c-441d-41b1-494f43e82fb8
 }
 ```
 
+#### Call /api via Gateway
+
 If you have [Todo(s) backing API](https://github.com/corbtastik/todos-api) and [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on PAS you can access those apps through the Gateway endpoint.
 
 ```bash
@@ -330,7 +334,11 @@ X-Vcap-Request-Id: e7f76f98-6586-4244-493a-47b5b33ff0ac
 Transfer-Encoding: chunked
 
 []
+```
 
+#### Call Todo(s) API via Gateway
+
+```bash
 > http todos-gateway.cfapps.io/api/ title="make bacon pancakes"
 HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
@@ -344,6 +352,8 @@ Transfer-Encoding: chunked
     "title": "make bacon pancakes"
 }
 ```
+
+#### Todo(s) UI via Gateway
 
 The Gateway returns the Todo(s) UI app when called on the root path.  For example this call returns HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
 
@@ -370,6 +380,27 @@ cache-control: max-age=3600
 ```
 
 Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``http://todos-gateway.cfapps.io``.
+
+#### Todo(s) Gateway Cloud Environment - User Provided Env Vars
+
+The environment variables we set in ``vars.yml`` are indeed found in the apps Environment on PAS.
+
+```bash
+> cf env todos-gateway
+Getting env variables for app todos-gateway in org bubbles / space dev as ...
+OK
+System-Provided: {
+ "VCAP_APPLICATION": { }
+}
+User-Provided:
+EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://cloud-index.cfapps.io/eureka/
+TODOS_API_ENDPOINT: http://todos-api.cfapps.io/todos
+TODOS_UI_ENDPOINT: http://todos-ui.cfapps.io
+```
+
+### Done Boom - Stay Frosty
+
+
 
 
 
