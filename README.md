@@ -299,6 +299,78 @@ buildpack:         java_buildpack
 #0   running   2018-06-23T23:50:33Z   113.9%   389.2M of 1G   165.4M of 1G  
 ```
 
+### Verify on Cloud
+
+Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
+
+```bash
+> http todos-gateway.cfapps.io/ops/routes
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 105
+Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:55:59 GMT
+X-Vcap-Request-Id: e60c6342-0b0c-441d-41b1-494f43e82fb8
+
+{
+    "/**": "http://todos-ui.cfapps.io",
+    "/api/**": "http://todos-api.cfapps.io/todos",
+    "/ops/**": "forward:/ops"
+}
+```
+
+If you have [Todo(s) backing API](https://github.com/corbtastik/todos-api) and [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on PAS you can access those apps through the Gateway endpoint.
+
+```bash
+> http todos-gateway.cfapps.io/api/
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:58:18 GMT
+X-Vcap-Request-Id: e7f76f98-6586-4244-493a-47b5b33ff0ac
+Transfer-Encoding: chunked
+
+[]
+
+> http todos-gateway.cfapps.io/api/ title="make bacon pancakes"
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 23 Jun 2018 23:59:09 GMT
+X-Vcap-Request-Id: 8354700e-f454-4b39-73ed-2adf3e991f97
+Transfer-Encoding: chunked
+
+{
+    "completed": false,
+    "id": 0,
+    "title": "make bacon pancakes"
+}
+```
+
+The Gateway returns the Todo(s) UI app when called on the root path.  For example this call returns HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
+
+```bash
+> http todos-gateway.cfapps.io/
+HTTP/1.1 200 
+Content-Type: text/html;charset=UTF-8
+Date: Sun, 24 Jun 2018 00:01:42 GMT
+Transfer-Encoding: chunked
+X-Vcap-Request-Id: b7a0a265-2a24-46ef-5a55-e0efa5d388a7
+cache-control: max-age=3600
+
+<!doctype html>
+<html data-framework="vue">
+	<head>
+		<meta charset="utf-8">
+		<title>Vue.js • TodoMVC</title>
+		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+		<style> [v-cloak] { display: none; } </style>
+	</head>
+	<body>
+		<section class="todoapp" v-cloak>
+```
+
+Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``http://todos-gateway.cfapps.io``.
+
 
 
 
