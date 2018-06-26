@@ -1,18 +1,18 @@
-server:
-    port: 9999
 spring:
     application:
         name: todos-gateway
-eureka:
-    client:
-        service-url:
-            defaultZone: http://localhost:8761/eureka        
+server:
+    port: 9999
 management:
     endpoints:
         web:
             base-path: /ops
             exposure:
                 include: '*'
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
 todos:
     api:
         endpoint: http://localhost:8080/todos
