@@ -12,81 +12,105 @@ For example ``/api`` is mapped to a [backing API](https://github.com/corbtastik/
 
 This gateway is used for the [Todo collection](https://github.com/corbtastik/todos-ecosystem) of Microservices which are part of a larger demo set used in Cloud Native Developer Workshops.
 
-Todo(s) Gateway has next to no code, it's a Spring Boot Microservice that boots an embedded tomcat server to host the Gateway.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is manual configuration of 2 routes.  When Todo(s) gateway boots into a Spring Cloud environment it will sync with Service Discovery and load Microservice routes dynamically as they come online and remove them when they go offline.  More on that later :)
+Todo(s) Gateway is a Spring Boot Microservice that functions as a Gateway and Router for Todo(s) Microservices.  It has a main class with the ``@SpringBootApplication`` annotation but also adds ``@EnableZuulProxy`` to enable auto-configuration of Zuul when the server starts.  Beyond that, the only thing we actually need to setup is manual configuration of 2 routes.  When Todo(s) gateway boots into a Spring Cloud environment it will sync with Service Discovery and load Microservice routes dynamically as they come online and remove them when they go offline.  More on that later :)
 
 **Route Configuration**
 
-```yml
-todos:
-    api:
-        endpoint: http://localhost:8080/todos    
-    ui:
-        endpoint: http://localhost:4040
+```yml  
 # Router configuration
 zuul:
     routes:
-zuul:
-    routes:
-        todos-gateway-ops:
+        ops:
             path: /ops/**
-            url: forward:/ops    
-        todos-api:
+            url: forward:/ops  
+        api:
             path: /api/**
-            url: ${todos.api.endpoint}            
-        todos-ui:
+            url: http://localhost:8080
+        ui:
             path: /**
-            url: ${todos.ui.endpoint}
+            url: http://localhost:4040
+# We let zuul handle routing to the Target url for /api/**
+# by configuring zuul.routes, however
+# We can active which /api/** to plugin by starting up with:
+# --todos-api-mode=simple OR --todos-api-mode=cqrs
+#todos:
+#  api:
+#    mode: cqrs
 ```
 
-By default only 3 routes are defined, one for a backing API and one for a frontend UI and a forward to itself so [actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) are exposed.  Specifically the backing API and UI are part of the Todo-EcoSystem of Microservices.  The frontend UI is the Vue.js implementation of [TodoMVC](http://todomvc.com/examples/vue/) and the backing API implements endpoints necessary to make the UI function.  In order to use this Gateway you need to clone, build and run each of these apps.  See the respective repos for information on the [UI](https://github.com/corbtastik/todos-ui) and [API](https://github.com/corbtastik/todos-api).
+By default only 3 routes are defined, one for a backing API, one for a frontend UI and a forward to itself so [actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) are exposed.  Specifically the backing API and UI are part of the Todo-EcoSystem of Microservices.  The frontend UI is the Vue.js implementation of [TodoMVC](http://todomvc.com/examples/vue/) and the backing API implements endpoints necessary to support it.  In order to use this Gateway you need to clone, build and run each of these apps.  See the respective repos for information on the [UI](https://github.com/corbtastik/todos-ui) and [API](https://github.com/corbtastik/todos-api).
+
+If you keep with all the defaults then [Todo(s)-UI](https://github.com/corbtastik/todos-ui) is on port 4040 and [Todo(s) Api](https://github.com/corbtastik/todos-api) on 8080.  However you can override at boot time, see below.
 
 ### Build
 
 ```bash
-git clone https://github.com/corbtastik/todos-gateway.git
-cd todos-gateway
-./mvnw clean package
+> git clone https://github.com/corbtastik/todos-gateway.git
+> cd todos-gateway
+> ./mvnw clean package
 ```
 
-### Run 
+### Run  
+
+Default UI and API endpoints.
 
 ```bash
-java -jar target/todos-gateway-1.0.0.SNAP.jar
+> java -jar target/todos-gateway-1.0.0.SNAP.jar
+```
+
+### Run with Remote Debug  
+
+```bash
+> java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=9111,suspend=n \
+  -jar target/todos-gateway-1.0.0.SNAP.jar
 ```
 
 ### Run Overrides
 
-```bash
-java -jar target/todos-gateway-1.0.0.SNAP.jar \
-  --todos.api.endpoint=howdy \
-  --todos.ui.endpoint=spring-boot
+#### Customize UI and API endpoints
+
+```bash  
+> java -jar target/todos-gateway-1.0.0.SNAP.jar \
+  --zuul.routes.api.url=http://localhost:8080 \
+  --zuul.routes.ui.url=http://localhost:4040
 ```
 
 This will override the API and UI endpoints.
 
 ```bash
 > http :9999/ops/routes
-HTTP/1.1 200 
+HTTP/1.1 200  
 Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:30:15 GMT
 Transfer-Encoding: chunked
 
 {
-    "/**": "spring-boot",
-    "/api/**": "howdy",
+    "/**": "http://localhost:4040",
+    "/api/**": "http://localhost:8080",
     "/ops/**": "forward:/ops"
 }
 ```
 
-### Run with Remote Debug 
-```bash
-java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=9111,suspend=n \
-  -jar target/todos-gateway-1.0.0.SNAP.jar
+#### Run with Simple backend
+
+Booting this way causes the Gateway to plug up a Todo(s) backing api.  By default [Todo(s) API](https://github.com/corbtastik/todos-gateway.git) is the implementation that handles "simple" mode.
+
+```bash  
+> java -jar target/todos-gateway-1.0.0.SNAP.jar \
+  --todos.api.mode=simple
 ```
 
-By default the Gateway binds to port ``9999`` but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the Todo EcoSystem of apps.  When we push to the Cloud we'll let the Cloud Platform (PAS Pivotal Application Service) manage what port is used.
+#### Run with CQRS backend  
+
+Booting this way causes the Gateway to plug up a Todo(s) backing api.  When started in "cqrs" mode the API backend will handle API requests using a [CQRS pattern](https://github.com/corbtastik/todos-ecosystem/blob/master/PART_5.md).
+
+```bash  
+> java -jar target/todos-gateway-1.0.0.SNAP.jar \
+  --todos.api.mode=cqrs
+```
 
 ### Verify
+
+By default the Gateway binds to port ``9999`` but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the [Todo(s) EcoSystem](https://github.com/corbtastik/todos-ecosystem) of apps.  When we push to the Cloud we'll let the Cloud Platform (PAS Pivotal Application Service) manage what port is used.
 
 Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
@@ -94,12 +118,10 @@ Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx
 > http :9999/ops/routes
 HTTP/1.1 200 
 Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
-Date: Sat, 23 Jun 2018 22:43:46 GMT
-Transfer-Encoding: chunked
 
 {
     "/**": "http://localhost:4040",
-    "/api/**": "http://localhost:8080/todos",
+    "/api/**": "http://localhost:8080",
     "/ops/**": "forward:/ops"
 }
 ```
@@ -107,19 +129,21 @@ Transfer-Encoding: chunked
 If you have the [Todo(s) backing API](https://github.com/corbtastik/todos-api) running locally on port ``8080`` and the [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on ``4040`` then you can access those apps through the Gateway endpoint as shown below.
 
 ```bash
-> http :9999/api/ 
+> http :9999/api/todos/  
 HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:18:24 GMT
-Transfer-Encoding: chunked
+X-TODOS-GATEWAY-API-MODE: default
+X-TODOS-GATEWAY-REQUEST-DURATION-MS: 17
+X-TODOS-GATEWAY-REQUEST-ID: c6a11282-ba51-4898-a814-c7448836d18b
 
 []
 
-> http :9999/api/ title="make bacon pancakes"
+> http :9999/api/todos/ title="make bacon pancakes"
 HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:18:37 GMT
-Transfer-Encoding: chunked
+X-TODOS-GATEWAY-API-MODE: default
+X-TODOS-GATEWAY-REQUEST-DURATION-MS: 6
+X-TODOS-GATEWAY-REQUEST-ID: cd96296c-92dd-43e3-a685-ad66af1020e9
 
 {
     "completed": false,
@@ -134,11 +158,6 @@ The Gateway returns the Todo(s) UI app when client calls on the root path.  For 
 > http :9999/
 HTTP/1.1 200 
 Content-Type: text/html;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:18:19 GMT
-Transfer-Encoding: chunked
-cache-control: max-age=3600
-etag: W/"1984861-2524-"2018-06-23T20:01:15.169Z""
-last-modified: Sat, 23 Jun 2018 20:01:15 GMT
 
 <!doctype html>
 <html data-framework="vue">
@@ -153,9 +172,10 @@ last-modified: Sat, 23 Jun 2018 20:01:15 GMT
 		<section class="todoapp" v-cloak>
 ```
 
-Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``localhost:9999``.
+Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``localhost:9999``.  
+
 <p align="center">
-  <img src="https://github.com/corbtastik/todos-images/raw/master/todos-gateway-images/todos-gateway-ui.png">
+  <img src="https://github.com/corbtastik/todos-images/raw/master/todos-images/todos-ui-online.png">
 </p>
 
 ### Spring Cloud Ready
