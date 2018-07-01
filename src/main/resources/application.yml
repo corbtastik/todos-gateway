@@ -16,14 +16,6 @@ eureka:
     client:
         service-url:
             defaultZone: http://localhost:8761/eureka/
-todos:
-    api:
-        endpoint: http://localhost:8080/todos
-    ui:
-        endpoint: http://localhost:4040
-#todos-api:
-#    ribbon:
-#        listOfServers: localhost:8080
 # Router configuration
 zuul:
     routes:
@@ -32,8 +24,14 @@ zuul:
             url: forward:/ops        
         api:
             path: /api/**
-            stripPrefix: true
-#            url: ${todos.api.endpoint}
+            url: http://localhost:8080
         ui:
             path: /**
-            url: ${todos.ui.endpoint}
+            url: http://localhost:4040
+# We let zuul handle routing to the Target url for /api/**
+# by configuring zuul.routes, however
+# We can active which /api/** to plugin by starting up with:
+# --todos-api-mode=simple OR --todos-api-mode=cqrs
+#todos:
+#  api:
+#    mode: cqrs

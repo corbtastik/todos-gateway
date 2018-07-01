@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
 @EnableDiscoveryClient
@@ -18,18 +18,20 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class TodosGatewayApp {
 
+
     @Bean
     ApiPreFilter apiPreFilter() {
         return new ApiPreFilter();
     }
 
     @Bean
-    ApiRouteFilter apiRouteFilter(
-        @Autowired DiscoveryClient discoveryClient,
-        @Autowired RestTemplate restTemplate,
-        @Autowired TodosAPIClient apiClient) {
+    DefaultModePreFilter defaultModePreFilter(@Autowired Environment env) {
+        return new DefaultModePreFilter(env);
+    }
 
-        return new ApiRouteFilter(discoveryClient, restTemplate, apiClient);
+    @Bean
+    CqrsModePreFilter cqrsModePreFilter(@Autowired Environment env) {
+        return new CqrsModePreFilter(env);
     }
 
     @Bean
