@@ -110,7 +110,7 @@ Booting this way causes the Gateway to plug up a Todo(s) backing api.  When star
 
 ### Verify
 
-By default the Gateway binds to port ``9999`` but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the [Todo(s) EcoSystem](https://github.com/corbtastik/todos-ecosystem) of apps.  When we push to the Cloud we'll let the Cloud Platform (PAS Pivotal Application Service) manage what port is used.
+By default the Gateway binds to port ``9999`` but this can be overridden on the command line by passing a new port like so, ``--server.port=9191``.  Knowing the port is really only necessary for local deployment of the [Todo(s) EcoSystem](https://github.com/corbtastik/todos-ecosystem#apps) of apps.  When we push to the Cloud we'll let the Cloud Platform (PAS Pivotal Application Service) manage what port is used.
 
 Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/routes`` and get a listing of proxy-paths.
 
