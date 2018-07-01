@@ -175,7 +175,7 @@ Content-Type: text/html;charset=UTF-8
 Which means we can load the Todo(s) UI with the Browser by accessing the Gateway on ``localhost:9999``.  
 
 <p align="center">
-  <img src="https://github.com/corbtastik/todos-images/raw/master/todos-images/todos-ui-online.png">
+  <img src="https://github.com/corbtastik/todos-images/blob/master/todos-ui/todos-ui-online.png">
 </p>
 
 ### Spring Cloud Ready
