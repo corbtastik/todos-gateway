@@ -1,6 +1,9 @@
 spring:
     application:
         name: todos-gateway
+logging:
+    level:
+        io.corbs: DEBUG
 server:
     port: 9999
 management:
@@ -18,15 +21,19 @@ todos:
         endpoint: http://localhost:8080/todos
     ui:
         endpoint: http://localhost:4040
+#todos-api:
+#    ribbon:
+#        listOfServers: localhost:8080
 # Router configuration
 zuul:
     routes:
-        todos-gateway-ops:
+        ops:
             path: /ops/**
             url: forward:/ops        
-        todos-api:
+        api:
             path: /api/**
-            url: ${todos.api.endpoint}            
-        todos-ui:
+            stripPrefix: true
+#            url: ${todos.api.endpoint}
+        ui:
             path: /**
             url: ${todos.ui.endpoint}
