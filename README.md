@@ -152,11 +152,11 @@ X-TODOS-GATEWAY-REQUEST-ID: cd96296c-92dd-43e3-a685-ad66af1020e9
 }
 ```
 
-The Gateway returns the Todo(s) UI app when client calls on the root path.  For example this call returns the HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
+The Gateway returns the [Todo(s) UI](https://github.com/corbtastik/todos-ui) app when client calls on the root path ``/``.  For example this call returns the HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
 
 ```bash
 > http :9999/
-HTTP/1.1 200 
+HTTP/1.1 200  
 Content-Type: text/html;charset=UTF-8
 
 <!doctype html>
