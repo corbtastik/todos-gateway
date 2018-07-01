@@ -38,7 +38,7 @@ zuul:
 #    mode: cqrs
 ```
 
-By default only 3 routes are defined, one for a backing API, one for a frontend UI and a forward to itself so [actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) are exposed.  Specifically the backing API and UI are part of the Todo-EcoSystem of Microservices.  The frontend UI is the Vue.js implementation of [TodoMVC](http://todomvc.com/examples/vue/) and the backing API implements endpoints necessary to support it.  In order to use this Gateway you need to clone, build and run each of these apps.  See the respective repos for information on the [UI](https://github.com/corbtastik/todos-ui) and [API](https://github.com/corbtastik/todos-api).
+By default only 3 routes are defined, one for a backing API, one for a frontend UI and a forward to itself so [actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) are exposed.  Specifically the backing API and UI are part of the [Todo(s)-EcoSystem](https://github.com/corbtastik/todos-ecosystem) of Microservices.  The frontend UI is the Vue.js implementation of [TodoMVC](http://todomvc.com/examples/vue/) and the backing API implements endpoints necessary to support it.  In order to use this Gateway you need to clone, build and run each of these apps.  See the respective repos for information on the [UI](https://github.com/corbtastik/todos-ui) and [API](https://github.com/corbtastik/todos-api).
 
 If you keep with all the defaults then [Todo(s)-UI](https://github.com/corbtastik/todos-ui) is on port 4040 and [Todo(s) Api](https://github.com/corbtastik/todos-api) on 8080.  However you can override at boot time, see below.
 
