@@ -286,9 +286,9 @@ app:
   route:  # your route value, ex: todos-gateway.cfapps.io
 env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
 env-val-1: # your service discovery url, ex: http://cloud-index.cfapps.io/eureka/
-env-key-2: TODOS_UI_ENDPOINT
+env-key-2: ZUUL_ROUTES_UI_URL
 env-val-2: # your todo(s) UI url, ex: http://todos-ui.cfapps.io
-env-key-3: TODOS_API_ENDPOINT
+env-key-3: ZUUL_ROUTES_API_URL
 env-val-3: # your todo(s) API url, ex: http://todos-api.cfapps.io/todos
 ```
 
