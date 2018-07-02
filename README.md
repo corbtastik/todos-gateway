@@ -328,15 +328,12 @@ Once the Gateway is running, use an HTTP Client such as [cURL](https://curl.haxx
 ```bash
 > http todos-gateway.cfapps.io/ops/routes
 HTTP/1.1 200 OK
-Connection: keep-alive
-Content-Length: 105
 Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:55:59 GMT
-X-Vcap-Request-Id: e60c6342-0b0c-441d-41b1-494f43e82fb8
+X-Vcap-Request-Id: 784f6c17-2379-4cce-7c3f-0b25b4b7b426
 
 {
     "/**": "http://todos-ui.cfapps.io",
-    "/api/**": "http://todos-api.cfapps.io/todos",
+    "/api/**": "http://todos-api.cfapps.io",
     "/ops/**": "forward:/ops"
 }
 ```
@@ -346,25 +343,27 @@ X-Vcap-Request-Id: e60c6342-0b0c-441d-41b1-494f43e82fb8
 If you have [Todo(s) backing API](https://github.com/corbtastik/todos-api) and [Todo(s) frontend UI](https://github.com/corbtastik/todos-ui) running on PAS you can access those apps through the Gateway endpoint.
 
 ```bash
-> http todos-gateway.cfapps.io/api/
-HTTP/1.1 200 
+> http todos-gateway.cfapps.io/api/todos/
+HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:58:18 GMT
-X-Vcap-Request-Id: e7f76f98-6586-4244-493a-47b5b33ff0ac
-Transfer-Encoding: chunked
+X-Todos-Gateway-Api-Mode: default
+X-Todos-Gateway-Request-Duration-Ms: 14
+X-Todos-Gateway-Request-Id: a44be00b-0058-4749-9de8-5eed09a65bc0
+X-Vcap-Request-Id: 1b880925-b692-4658-5f48-8d85fac202a3
 
 []
 ```
 
-#### Call Todo(s) API via Gateway
+#### Create a Todo via Gateway
 
 ```bash
-> http todos-gateway.cfapps.io/api/ title="make bacon pancakes"
-HTTP/1.1 200 
+> http todos-gateway.cfapps.io/api/todos/ title="make bacon pancakes"
+HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Date: Sat, 23 Jun 2018 23:59:09 GMT
-X-Vcap-Request-Id: 8354700e-f454-4b39-73ed-2adf3e991f97
-Transfer-Encoding: chunked
+X-Todos-Gateway-Api-Mode: default
+X-Todos-Gateway-Request-Duration-Ms: 37
+X-Todos-Gateway-Request-Id: 6c138c72-f17f-41ec-8758-2785fc6a2ea2
+X-Vcap-Request-Id: 4a4dc5a1-a181-4878-75da-69cacc1ccd09
 
 {
     "completed": false,
@@ -375,16 +374,13 @@ Transfer-Encoding: chunked
 
 #### Todo(s) UI via Gateway
 
-The Gateway returns the Todo(s) UI app when called on the root path.  For example this call returns HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
+The Gateway returns the [Todo(s) UI](https://github.com/corbtastik/todos-ui) app when called on the root path.  For example this call returns HTML, JavaScript and CSS necessary to render the UI client-side (i.e. a Web Browser).
 
 ```bash
 > http todos-gateway.cfapps.io/
-HTTP/1.1 200 
+HTTP/1.1 200  
 Content-Type: text/html;charset=UTF-8
-Date: Sun, 24 Jun 2018 00:01:42 GMT
-Transfer-Encoding: chunked
 X-Vcap-Request-Id: b7a0a265-2a24-46ef-5a55-e0efa5d388a7
-cache-control: max-age=3600
 
 <!doctype html>
 <html data-framework="vue">
@@ -414,8 +410,8 @@ System-Provided: {
 }
 User-Provided:
 EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://cloud-index.cfapps.io/eureka/
-TODOS_API_ENDPOINT: http://todos-api.cfapps.io/todos
-TODOS_UI_ENDPOINT: http://todos-ui.cfapps.io
+ZUUL_ROUTES_API_URL: http://todos-api.cfapps.io
+ZUUL_ROUTES_UI_URL: http://todos-ui.cfapps.io
 ```
 
 ### Stay Frosty  
