@@ -55,15 +55,15 @@ Zuul supports [4 filter types](https://github.com/Netflix/zuul/wiki/How-it-Works
 
 We customize how routing in the ``/api/`` context is handled.  By default Todo(s) Gateway uses default Zuul routing configured in ``application.yml``.  By changing ``todos.api.mode`` we change how the API backend is wired up.
 
-1. ``todos.api.mode`` not provided
+#### ``todos.api.mode`` not provided
 
 * ``/api`` - uses ``zuul.routes.api.url``
 
-1. ``todos.api.mode=simple``
+#### ``todos.api.mode=simple``
 
 * ``/api`` - uses ``serviceId=todos-api``
 
-1. ``todos.api.mode=cqrs``
+#### ``todos.api.mode=cqrs``
 
 * ``/api`` - uses ``serviceIds=todos-command,todos-query``
 
