@@ -256,8 +256,8 @@ The only PAS specific artifacts in this code repo are ``manifest.yml`` and ``var
 The Todo(s) Gateway requires 3 environment variables:
 
 1. ``EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE`` - Service Discovery URL
-2. ``TODOS_UI_ENDPOINT`` - [Todo(s) UI in Vue.js](https://github.com/corbtastik/todos-ui) URL
-3. ``TODOS_API_ENDPOINT`` - [Todo(s) API](https://github.com/corbtastik/todos-api) in Spring Boot
+2. ``ZUUL_ROUTES_UI_URL`` - [Todo(s) UI in Vue.js](https://github.com/corbtastik/todos-ui) URL
+3. ``ZUUL_ROUTES_API_URL`` - [Todo(s) API](https://github.com/corbtastik/todos-api) in Spring Boot
 
 #### manifest.yml
 
