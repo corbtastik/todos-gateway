@@ -42,6 +42,17 @@ By default only 3 routes are defined, one for a backing API, one for a frontend 
 
 If you keep with all the defaults then [Todo(s)-UI](https://github.com/corbtastik/todos-ui) is on port 4040 and [Todo(s) Api](https://github.com/corbtastik/todos-api) on 8080.  However you can override at boot time, see below.
 
+One noteworthy talking point about Todo(s) Gateway is it takes advantage of standard Zuul routing as configured by [``ZuulProxyAutoConfiguration``](https://github.com/spring-cloud/spring-cloud-netflix/blob/master/spring-cloud-netflix-zuul/src/main/java/org/springframework/cloud/netflix/zuul/ZuulProxyAutoConfiguration.java) but also introduces custom Routing.  To customize Zuul you extend ``ZuulFilter`` and provide implementation for ``filterType()``, ``filterOrder()``, ``shouldFilter()`` and ``run()``.
+
+Zuul supports [4 filter types](https://github.com/Netflix/zuul/wiki/How-it-Works#zuul-request-lifecycle):
+
+1. pre: filters that execute before routing to target
+1. route: filters that route calls to target
+1. post: filters that execute after routing to target
+1. error: filters that execute when an error occurs
+
+
+
 ### Build
 
 ```bash
