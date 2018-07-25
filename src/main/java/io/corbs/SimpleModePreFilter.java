@@ -2,14 +2,18 @@ package io.corbs;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
-public class DefaultModePreFilter extends ZuulFilter {
+public class SimpleModePreFilter extends ZuulFilter {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleModePreFilter.class);
 
     private Environment env;
 
-    public DefaultModePreFilter(@Autowired Environment env) {
+    public SimpleModePreFilter(@Autowired Environment env) {
         this.env = env;
     }
 
@@ -32,10 +36,9 @@ public class DefaultModePreFilter extends ZuulFilter {
         }
 
         if(this.env.containsProperty("todos.api.mode")) {
-            if("simple".equalsIgnoreCase(this.env.getProperty("todos.api.mode").trim())) {
-                return true;
-            }
-            return "".equals(this.env.getProperty("todos.api.mode").trim());
+            String apiMode = this.env.getProperty("todos.api.mode");
+            LOG.debug("todos.api.mode=" + apiMode);
+            return "simple".equalsIgnoreCase(apiMode) || "".equalsIgnoreCase(apiMode);
         }
 
         return false;
@@ -43,6 +46,7 @@ public class DefaultModePreFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+        LOG.debug("SimpleModePreFilter.run() api.mode=simple calling serviceId todos-api");
         RequestContext context = RequestContext.getCurrentContext();
         context.set("serviceId", "todos-api");
         context.set("api.mode", "simple");

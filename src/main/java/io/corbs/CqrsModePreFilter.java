@@ -9,7 +9,7 @@ import org.springframework.core.env.Environment;
 
 public class CqrsModePreFilter extends ZuulFilter {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultModePreFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CqrsModePreFilter.class);
 
     private Environment env;
 
@@ -44,24 +44,29 @@ public class CqrsModePreFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+        LOG.debug("CqrsModePreFilter.run() api.mode=cqrs calling...");
         RequestContext context = RequestContext.getCurrentContext();
         String method = context.getRequest().getMethod().toUpperCase();
         switch(method) {
             // C.U.D
             case "POST": {
+                LOG.debug("POST serviceId todos-command");
                 context.set("serviceId", "todos-command");
                 break;
             }
             case "PATCH": {
+                LOG.debug("PATCH serviceId todos-command");
                 context.set("serviceId", "todos-command");
                 break;
             }
             case "DELETE": {
+                LOG.debug("DELETE serviceId todos-command");
                 context.set("serviceId", "todos-command");
                 break;
             }
             // R
             case "GET": {
+                LOG.debug("GET serviceId todos-query");
                 context.set("serviceId", "todos-query");
                 break;
             }

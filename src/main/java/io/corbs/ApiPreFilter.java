@@ -2,8 +2,12 @@ package io.corbs;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApiPreFilter extends ZuulFilter {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApiPreFilter.class);
 
     @Override
     public String filterType() {
@@ -23,6 +27,7 @@ public class ApiPreFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+        LOG.debug("ApiPreFilter.run()");
         RequestContext context = RequestContext.getCurrentContext();
         context.set("api.mode", "default");
         context.set("api.request.start", System.currentTimeMillis());

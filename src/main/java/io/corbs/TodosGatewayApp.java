@@ -25,8 +25,8 @@ public class TodosGatewayApp {
     }
 
     @Bean
-    DefaultModePreFilter defaultModePreFilter(@Autowired Environment env) {
-        return new DefaultModePreFilter(env);
+    SimpleModePreFilter defaultModePreFilter(@Autowired Environment env) {
+        return new SimpleModePreFilter(env);
     }
 
     @Bean
