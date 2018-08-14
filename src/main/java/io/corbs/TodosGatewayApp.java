@@ -18,15 +18,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class TodosGatewayApp {
 
-
     @Bean
     ApiPreFilter apiPreFilter() {
         return new ApiPreFilter();
-    }
-
-    @Bean
-    SimpleModePreFilter defaultModePreFilter(@Autowired Environment env) {
-        return new SimpleModePreFilter(env);
     }
 
     @Bean

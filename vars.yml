@@ -3,9 +3,5 @@ app:
   artifact: target/todos-gateway-1.0.0.SNAP.jar
   memory: 1G
   route: todos-gateway.cfapps.io
-env-key-1: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
-env-val-1: http://cloud-index.cfapps.io/eureka/
-env-key-2: ZUUL_ROUTES_UI_URL
-env-val-2: http://todos-ui.cfapps.io
-env-key-3: ZUUL_ROUTES_API_URL
-env-val-3: http://todos-api.cfapps.io
+env-key-1: CONFIG_SERVER_URI
+env-val-1: https://config-srv.cfapps.io

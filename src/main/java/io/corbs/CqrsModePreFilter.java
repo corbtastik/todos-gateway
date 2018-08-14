@@ -24,19 +24,15 @@ public class CqrsModePreFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 102;
+        return 101;
     }
 
     @Override
     public boolean shouldFilter() {
         RequestContext context = RequestContext.getCurrentContext();
 
-        if(!context.getRequest().getRequestURI().startsWith("/api")) {
+        if(!context.getRequest().getRequestURI().startsWith("/cqrs")) {
             return false;
-        }
-
-        if(this.env.containsProperty("todos.api.mode")) {
-            return "cqrs".equalsIgnoreCase(this.env.getProperty("todos.api.mode").trim());
         }
 
         return false;
@@ -44,7 +40,6 @@ public class CqrsModePreFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-        LOG.debug("CqrsModePreFilter.run() api.mode=cqrs calling...");
         RequestContext context = RequestContext.getCurrentContext();
         String method = context.getRequest().getMethod().toUpperCase();
         switch(method) {
@@ -74,7 +69,6 @@ public class CqrsModePreFilter extends ZuulFilter {
                 LOG.debug("method not supported " + method);
             }
         }
-        context.set("api.mode", "cqrs");
         return null;
     }
 }

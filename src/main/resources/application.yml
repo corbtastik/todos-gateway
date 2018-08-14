@@ -28,10 +28,3 @@ zuul:
         ui:
             path: /**
             url: http://localhost:4040
-# We let zuul handle routing to the Target url for /api/**
-# by configuring zuul.routes, however
-# We can active which /api/** to plugin by starting up with:
-# --todos-api-mode=simple OR --todos-api-mode=cqrs
-#todos:
-#  api:
-#    mode: cqrs

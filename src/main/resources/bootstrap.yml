@@ -3,4 +3,4 @@ spring:
     name: todos-gateway
   cloud:
     config:
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888}

@@ -29,7 +29,6 @@ public class ApiPreFilter extends ZuulFilter {
     public Object run() {
         LOG.debug("ApiPreFilter.run()");
         RequestContext context = RequestContext.getCurrentContext();
-        context.set("api.mode", "default");
         context.set("api.request.start", System.currentTimeMillis());
         return null;
     }
